@@ -102,3 +102,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT,INSERT,UPDATE ON TABLES T
 
 # search git history
 `git log -Spassword`
+
+
+# is there any process on my machine currently listening to port 5432
+`lsof -n -i:5432 | grep LISTEN`
