@@ -80,7 +80,7 @@ parse_params() {
 parse_params "$@"
 setup_colors
 
-cp $script_dir/template_script.sh $file
+cp $script_dir/bash_script.template $file
 
 msg "script file created: ${file}"
 
