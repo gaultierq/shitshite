@@ -48,8 +48,7 @@ die() {
 parse_params() {
   # default values of variables set from params
   up=0
-  param=''
-  create=''
+  create=0
 
   while :; do
     case "${1-}" in
@@ -58,16 +57,17 @@ parse_params() {
     --no-color) NO_COLOR=1 ;;
      --up) up=1 ;;
     -c | --create)
-      create="${2-}"
+      create=1
       up=1
-      shift
+      create_database_name="${2-}"
+      [[ ! -z ${create_database_name-} ]] && shift
       ;;
     -?*) die "Unknown option: $1" ;;
     *) break ;;
     esac
     shift
   done
-
+  
   args=("$@")
 
   # check required params and arguments
@@ -107,13 +107,13 @@ docker_up() {
 }
 
 create_db() {
-  createdb -h localhost -p 5432 -U postgres $1
-  msg "Database created, available in env with:"
-  echo export DATABASE_URL="postgres://postgres@localhost:5432/$1"
-
+  local db_name=${1:-$(openssl rand -hex 4)}
+  
+  createdb -h localhost -p 5432 -U postgres ${db_name}
+  echo "postgres://postgres@localhost:5432/${db_name}"
 }
 
 [[ ${up} -eq 1 ]] && docker_up
 
-[[ ! -z "${create-}" ]] && create_db ${create}
+[[ ${create} -eq 1 ]] && create_db ${create_database_name}
 
