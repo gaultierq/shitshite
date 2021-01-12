@@ -2,17 +2,17 @@
 
 # echo "choose a workspace for your local db:" 
 
-workspace="local"
+# workspace="local"
 
-docker run \
--d \
--p 5432:5432 \
---rm \
--e POSTGRES_HOST_AUTH_METHOD=trust \
--e POSTGRES_PASSWORD=notneeded \
--v psql_$workspace:/var/lib/postgresql/data \
---name psql_${workspace} \
-postgres
+# docker run \
+# -d \
+# -p 5432:5432 \
+# --rm \
+# -e POSTGRES_HOST_AUTH_METHOD=trust \
+# -e POSTGRES_PASSWORD=notneeded \
+# -v psql_$workspace:/var/lib/postgresql/data \
+# --name psql_${workspace} \
+# postgres
 
 
 # -e POSTGRES_DB=${workspace}_db \
