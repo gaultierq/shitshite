@@ -106,3 +106,10 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT,INSERT,UPDATE ON TABLES T
 
 # is there any process on my machine currently listening to port 5432
 `lsof -n -i:5432 | grep LISTEN`
+
+
+# all white pixels to transparent
+convert ezgif-2-896e174bf4f9.png -fuzz 50% -transparent white output.png
+
+# crop transparent pixels on the side
+convert input.png -trim +repage output.png
